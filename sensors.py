@@ -32,10 +32,10 @@ while True:
     if msg:
       res = json.loads(str(msg['data']).replace("'", ""))
       if (type(res) == type(dict())):
-        print(res['sensor_type'])
-      else:
         for key, value in res.items():
           print(key, value)
+      else:
+        print(type(res))
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
