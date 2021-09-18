@@ -32,7 +32,7 @@ while True:
     if msg:
       res = json.loads(str(msg['data']).replace("'", ""))
       if (type(res) == type(dict())):
-        print(type(res['sensor_value']))
+        print(res['sensor_value']['altitude'])
       else:
         print(type(res))
     # try:
