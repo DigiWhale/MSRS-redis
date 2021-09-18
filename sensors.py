@@ -1,6 +1,7 @@
 # Simple example
 import time
 import redis
+from datetime import datetime
 from redistimeseries.client import Client
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
 count = 0
@@ -14,7 +15,7 @@ except:
     pass
 while True:
     count += 1
-    rts.add('heading', time.time(), count * .5)
+    rts.add('heading', datetime.now(), count * .5)
     print(rts.get('heading'))
     # try:
     #     rts.add('test', 1, 1.12)
