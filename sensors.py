@@ -1,6 +1,7 @@
 # Simple example
 import time
 import redis
+import random
 from datetime import datetime
 from redistimeseries.client import Client
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
@@ -14,9 +15,13 @@ try:
 except:
     pass
 while True:
-    count += 1
+    count = random.randint(0,360)
     rts.add('heading', '*', count * .5, duplicate_policy='last')
-    print(rts.get('heading'))
+    rts.add('acceleration', '*', count * .5, duplicate_policy='last')
+    rts.add('angle', '*', count * .5, duplicate_policy='last')
+    rts.add('distance', '*', count * .5, duplicate_policy='last')
+    rts.add('speed', '*', count * .5, duplicate_policy='last')
+    print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
