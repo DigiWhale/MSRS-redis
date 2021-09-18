@@ -33,12 +33,12 @@ while True:
       res = json.loads(str(msg['data']).replace("'", ""))
       if (type(res) == type(dict())):
         if (res['sensor_type'] == 6):
-          print(res['sensor_value'], res['sensor_value']['altitude'])
+          print(res['sensor_type'], res['sensor_value']['altitude'])
         elif (res['sensor_type'] == 3):
-          print(res['sensor_value'], res['sensor_value']['velocity_1'])
-          print(res['sensor_value'], res['sensor_value']['distance_1'])
+          print(res['sensor_type'], res['sensor_value']['velocity_1'])
+          print(res['sensor_type'], res['sensor_value']['distance_1'])
         elif (res['sensor_type'] == 4):
-          print(res['sensor_value'], res['sensor_value'])
+          print(res['sensor_type'], res['sensor_value']['heading_3'])
       else:
         print(type(res))
     # try:
