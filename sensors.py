@@ -31,7 +31,7 @@ while True:
     msg = p.get_message()
     if msg:
       res = json.loads(str(msg['data']).replace("'", ""))
-      print(type(res))
+      print(type(res), res)
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
