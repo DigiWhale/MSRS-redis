@@ -38,7 +38,7 @@ while True:
           print(res['sensor_value'], res['sensor_value']['velocity_1'])
           print(res['sensor_value'], res['sensor_value']['distance_1'])
         elif (res['sensor_type'] == 4):
-          print(res['sensor_value'], res['sensor_value']['heading'])
+          print(res['sensor_value'], res['sensor_value'])
       else:
         print(type(res))
     # try:
