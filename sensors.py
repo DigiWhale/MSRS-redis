@@ -33,7 +33,7 @@ while True:
       msg_obj = msg['data']
       res = json.loads(msg_obj)
       print(res)
-      print(msg_obj)
+      # print(msg_obj)
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
