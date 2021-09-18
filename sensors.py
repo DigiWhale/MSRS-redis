@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 from redistimeseries.client import Client
 
-r = redis.Redis(host='192.168.1.4', port=6379, db=0, password='Redis2019!')
+r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
 p.subscribe('msrs_raspberry')
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
