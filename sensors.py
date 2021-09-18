@@ -30,8 +30,7 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = json.loads(str(msg['data']).replace("b'{", '{').replace("\"}'", '"}'))
-      for key, value in msg_obj.items():
-        print(key, ' : ', value)
+      print(msg_obj)
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
