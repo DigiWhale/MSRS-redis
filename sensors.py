@@ -34,6 +34,9 @@ while True:
       if (type(res) == type(dict())):
         if (res['sensor_type'] == 6):
           print(res['sensor_value']['altitude'])
+        elif (res['sensor_type'] == 3):
+          print(res['sensor_value']['velocity_1'])
+          print(res['sensor_value']['distance_1'])
       else:
         print(type(res))
     # try:
