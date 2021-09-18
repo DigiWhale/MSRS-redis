@@ -30,7 +30,8 @@ while True:
     # print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
-      print(json.loads(str(msg['data']).replace("'", "")))
+      res = json.loads(str(msg['data']).replace("'", ""))
+      print(res.keys())
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
