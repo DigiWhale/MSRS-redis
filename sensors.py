@@ -5,6 +5,7 @@ import json
 import random
 from datetime import datetime
 from redistimeseries.client import Client
+import ast
 
 r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
@@ -30,7 +31,8 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = msg['data']
-      print(type(msg_obj))
+      res = ast.literal_eval(msg_obj)
+      print(res)
       print(msg_obj)
     # try:
     #     rts.add('test', 1, 1.12)
