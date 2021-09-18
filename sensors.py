@@ -31,7 +31,7 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = msg['data']
-      res = json.loads(msg_obj.replace("'", '"'))
+      res = json.loads(str(msg_obj).replace("'", '"'))
       print(res)
       # print(msg_obj)
     # try:
