@@ -4,6 +4,10 @@ import redis
 import random
 from datetime import datetime
 from redistimeseries.client import Client
+
+r = redis.Redis(host='192.168.1.4', port=6379, db=0, password='Redis2019!')
+p = r.pubsub()
+p.subscribe('msrs_raspberry')
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
 count = 0
 try:
@@ -22,6 +26,9 @@ while True:
     rts.add('distance', '*', count * .5, duplicate_policy='last')
     rts.add('speed', '*', count * .5, duplicate_policy='last')
     print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
+    msg = p.get_message()
+    if msg:
+      print(msg['data'])
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
