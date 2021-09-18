@@ -32,7 +32,7 @@ while True:
     if msg:
       msg_obj = msg['data']
       res = json.loads(str(msg_obj).replace("'", '"'))
-      for key, num in res.items() :
+      for key, num in res :
         print(key, num)
       # print(msg_obj)
     # try:
