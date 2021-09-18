@@ -34,7 +34,8 @@ while True:
       if (type(res) == type(dict())):
         print(res['sensor_type'])
       else:
-        print(type(res))
+        for key, value in res.items():
+          print(key, value)
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
