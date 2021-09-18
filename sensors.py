@@ -29,7 +29,8 @@ while True:
     print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
-      print(json.loads(str(msg['data']).replace("b'{", '{').replace("\"}'", '"}')))
+      msg_obj = json.loads(str(msg['data']).replace("b'{", '{').replace("\"}'", '"}'))
+      print(msg_obj['data']['sensor_type'])
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
