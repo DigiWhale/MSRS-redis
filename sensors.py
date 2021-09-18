@@ -1,6 +1,7 @@
 # Simple example
 import time
 import redis
+import json
 import random
 from datetime import datetime
 from redistimeseries.client import Client
@@ -28,7 +29,7 @@ while True:
     print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
-      print(msg['data'].decode('utf-8'))
+      print(json.loads(msg['data']))
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
