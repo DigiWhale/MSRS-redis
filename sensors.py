@@ -31,7 +31,7 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = msg['data']
-      res = ast.literal_eval(msg_obj)
+      res = json.loads(msg_obj)
       print(res)
       print(msg_obj)
     # try:
