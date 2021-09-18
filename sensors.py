@@ -15,7 +15,7 @@ except:
     pass
 while True:
     count += 1
-    rts.add('heading', datetime.now(), count * .5)
+    rts.add('heading', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), count * .5)
     print(rts.get('heading'))
     # try:
     #     rts.add('test', 1, 1.12)
