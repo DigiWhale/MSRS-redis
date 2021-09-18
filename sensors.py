@@ -26,7 +26,7 @@ while True:
     rts.add('angle', '*', count * .5, duplicate_policy='last')
     rts.add('distance', '*', count * .5, duplicate_policy='last')
     rts.add('speed', '*', count * .5, duplicate_policy='last')
-    print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
+    # print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
       msg_obj = msg['data']
