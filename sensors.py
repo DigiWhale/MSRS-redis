@@ -30,7 +30,7 @@ while True:
     # print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
-      for key in msg.values():
+      for key in msg['data'].values():
         print(key)
     # try:
     #     rts.add('test', 1, 1.12)
