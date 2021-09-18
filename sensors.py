@@ -32,7 +32,8 @@ while True:
     if msg:
       msg_obj = msg['data']
       res = json.loads(str(msg_obj).replace("'", '"'))
-      print(res['sensor_type'])
+      for key, num in res.items() :
+        print(key, num)
       # print(msg_obj)
     # try:
     #     rts.add('test', 1, 1.12)
