@@ -30,6 +30,7 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = msg['data']
+      print(type(msg_obj))
       print(msg_obj)
     # try:
     #     rts.add('test', 1, 1.12)
