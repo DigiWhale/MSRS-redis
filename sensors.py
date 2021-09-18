@@ -30,7 +30,7 @@ while True:
     msg = p.get_message()
     if msg:
       msg_obj = json.loads(str(msg['data']).replace("b'{", '{').replace("\"}'", '"}'))
-      print(msg_obj['data'])
+      print(type(msg_obj))
     # try:
     #     rts.add('test', 1, 1.12)
     #     rts.add('test', 2, 1.12)
