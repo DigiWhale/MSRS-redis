@@ -15,7 +15,7 @@ except:
     pass
 while True:
     count += 1
-    rts.add('heading', '*', count * .5)
+    rts.add('heading', '*', count * .5, duplicate_policy='last')
     print(rts.get('heading'))
     # try:
     #     rts.add('test', 1, 1.12)
