@@ -80,6 +80,5 @@ while True:
         print('New position is ', lat, lon)
     except Exception as e:
         print(e)
-    finally:
         log_dict_to_csv(new_position, 'route.csv')
         print('routes logged')
