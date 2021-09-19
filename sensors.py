@@ -85,7 +85,7 @@ while True:
 
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
-        geo_df = open.read_file('position_list.csv')
+        geo_df = open('position_list.csv').read()
 
         px.set_mapbox_access_token('pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig = px.scatter_geo(geo_df, lat=geo_df[0], lon=geo_df[1])
