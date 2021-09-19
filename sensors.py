@@ -23,11 +23,10 @@ def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
 
     return {'lat': lat2, 'lon': lon2}
   
-def log_dict_to_csv(log_dict, csv_file):
-    with open(csv_file, 'w+') as f:
-        for key, value in log_dict.items():
-            f.write(str(value) + ',')
-        f.write('\n')
+def log_dict_list_to_csv(dict_list, filename):
+    with open(filename, 'w') as f:
+        for d in dict_list:
+            f.write(','.join(str(d[k]) for k in d) + '\n')
 
 r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
