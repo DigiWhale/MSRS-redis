@@ -6,7 +6,9 @@ import random
 from datetime import datetime
 from redistimeseries.client import Client
 import math
-import matplotlib.pyplot as plt
+import plotly.express as px
+import geopandas as gpd
+
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
     R = 6378.1 #Radius of the Earth
@@ -84,10 +86,10 @@ while True:
 
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
-        xs = [0, 1, 2, 3, 4, 5, 6, 7]
-        ys = [1, 0.3, -2.3, 5.1, 7.6, -0.2, -1.8, 4]
+        geo_df = gpd.read_file('position_list.csv')
 
-        plt.plot(xs, ys)
-        plt.show()
+        px.set_mapbox_access_token('pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
+        fig = px.scatter_geo(geo_df, lat=geo_df[0], lon=geo_df[1])
+        fig.show()
         print("Logged positions")
         break
