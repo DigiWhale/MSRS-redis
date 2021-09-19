@@ -7,7 +7,6 @@ from datetime import datetime
 from redistimeseries.client import Client
 import math
 import matplotlib.pyplot as plt
-matplotlib.use("TkAgg")
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
     R = 6378.1 #Radius of the Earth
