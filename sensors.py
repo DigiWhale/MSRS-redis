@@ -22,6 +22,7 @@ except:
     pass
 while True:
     count = random.randint(0,360)
+    total_distance = 0
     
     
     
@@ -38,6 +39,7 @@ while True:
           # print(res['sensor_type'], res['sensor_value']['distance_1'])
           rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
           rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
+          total_distance += res['sensor_value']['distance_1'][1]
 
         elif (res['sensor_type'] == 4):
           # print(res['sensor_type'], res['sensor_value']['heading_3'])
@@ -51,7 +53,7 @@ while True:
     #     rts.add('test', 2, 1.12)
     # except:
     #     pass
-      print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'))
+      print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
     # time.sleep(1)
     # rts.incrby('test',1)
     # try:
