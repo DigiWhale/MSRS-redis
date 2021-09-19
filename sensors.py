@@ -22,6 +22,12 @@ def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
     lon2 = math.degrees(lon2)
 
     return {'lat': lat2, 'lon': lon2}
+  
+def log_dict_to_csv(log_dict, csv_file):
+    with open(csv_file, 'w+') as f:
+        for key, value in log_dict.items():
+            f.write(str(value) + ',')
+        f.write('\n')
 
 r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
@@ -40,33 +46,39 @@ try:
 except:
     pass
 while True:
-    msg = p.get_message()
-    if msg:
-      res = json.loads(str(msg['data']).replace("'", ""))
-      if (type(res) == type(dict())):
-        if (res['sensor_type'] == 6):
-          # print(res['sensor_type'], res['sensor_value']['altitude'])
-          rts.add('altitude', '*', res['sensor_value']['altitude'], duplicate_policy='last')
-        elif (res['sensor_type'] == 3):
-          # print(res['sensor_type'], res['sensor_value']['velocity_1'])
-          # print(res['sensor_type'], res['sensor_value']['distance_1'])
-          rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
-          rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
-          total_distance += res['sensor_value']['distance_1']
+    try:
+      msg = p.get_message()
+      if msg:
+        res = json.loads(str(msg['data']).replace("'", ""))
+        if (type(res) == type(dict())):
+          if (res['sensor_type'] == 6):
+            # print(res['sensor_type'], res['sensor_value']['altitude'])
+            rts.add('altitude', '*', res['sensor_value']['altitude'], duplicate_policy='last')
+          elif (res['sensor_type'] == 3):
+            # print(res['sensor_type'], res['sensor_value']['velocity_1'])
+            # print(res['sensor_type'], res['sensor_value']['distance_1'])
+            rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
+            rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
+            total_distance += res['sensor_value']['distance_1']
 
-        elif (res['sensor_type'] == 4):
-          # print(res['sensor_type'], res['sensor_value']['heading_3'])
-          rts.add('heading', '*', res['sensor_value']['heading_3'], duplicate_policy='last')
-        elif (res['sensor_type'] == 5):
-          # print(res['sensor_type'], res['sensor_value']['angle_2'])
-          rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
+          elif (res['sensor_type'] == 4):
+            # print(res['sensor_type'], res['sensor_value']['heading_3'])
+            rts.add('heading', '*', res['sensor_value']['heading_3'], duplicate_policy='last')
+          elif (res['sensor_type'] == 5):
+            # print(res['sensor_type'], res['sensor_value']['angle_2'])
+            rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
 
 
-      # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
-      heading = rts.get('heading')
-      distance = rts.get('distance')
-      # print(heading[1], distance[1])
-      new_position = calculate_new_coordinates(lat, lon, heading[1], distance[1])
-      lat = new_position['lat']
-      lon = new_position['lon']
-      print('New position is ', lat, lon)
+        # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
+        heading = rts.get('heading')
+        distance = rts.get('distance')
+        # print(heading[1], distance[1])
+        new_position = calculate_new_coordinates(lat, lon, heading[1], distance[1])
+        lat = new_position['lat']
+        lon = new_position['lon']
+        print('New position is ', lat, lon)
+    except Exception as e:
+        print(e)
+    finally:
+        log_dict_to_csv(new_position, 'route.csv')
+        print('routes logged')
