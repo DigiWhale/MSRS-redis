@@ -82,3 +82,4 @@ while True:
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
         print("Logged positions")
+        break
