@@ -37,6 +37,7 @@ count = 0
 total_distance = 0
 lat = 0
 lon = 0
+new_position = {'lat': 0, 'lon': 0}
 try:
     rts.create('heading', labels={'Time':'Series'})
     rts.create('altitude', labels={'Time':'Series'})
