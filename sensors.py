@@ -88,7 +88,7 @@ while True:
         log_dict_list_to_csv(position_list, 'position_list.csv')
         df = pd.DataFrame(position_list)
 
-        fig = px.scatter_mapbox(df, lat='lat', lon='lon', size_max=8, color=df.sensors_imu_ins_sensor_timeOfWeek, zoom=18, center={'lat': 0, 'lon': 0})
+        fig = px.scatter_mapbox(df, lat='lat', lon='lon', size_max=8, zoom=18, center={'lat': 0, 'lon': 0})
         fig.update_layout(mapbox_style="dark", mapbox_accesstoken='pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig.write_html('/home/pi/Desktop/map.html')
         print("Logged positions")
