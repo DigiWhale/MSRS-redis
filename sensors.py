@@ -77,7 +77,7 @@ while True:
         new_position = calculate_new_coordinates(lat, lon, heading[1], distance[1])
         lat = new_position['lat']
         lon = new_position['lon']
-        print('New position is ', lat, lon)
+        print('Heading: ', heading[1], 'Distance:', distance[1], 'New position is ', lat, lon)
         position_list.append({'lat': lat, 'lon': lon})
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
