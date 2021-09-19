@@ -38,6 +38,7 @@ total_distance = 0
 lat = 0
 lon = 0
 new_position = {'lat': 0, 'lon': 0}
+position_list = []
 try:
     rts.create('heading', labels={'Time':'Series'})
     rts.create('altitude', labels={'Time':'Series'})
@@ -78,7 +79,7 @@ while True:
         lat = new_position['lat']
         lon = new_position['lon']
         print('New position is ', lat, lon)
+        position_list.append({'lat': lat, 'lon': lon})
+        log_dict_to_csv(position_list, 'position_list.csv')
     except Exception as e:
         print(e)
-        log_dict_to_csv(new_position, 'route.csv')
-        print('routes logged')
