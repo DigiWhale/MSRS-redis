@@ -82,12 +82,12 @@ while True:
         position_list.append({'lat': lat, 'lon': lon})
         
 
+    except:
+        log_dict_list_to_csv(position_list, 'position_list.csv')
         xs = [0, 1, 2, 3, 4, 5, 6, 7]
         ys = [1, 0.3, -2.3, 5.1, 7.6, -0.2, -1.8, 4]
 
         plt.plot(xs, ys)
         plt.show()
-    except:
-        log_dict_list_to_csv(position_list, 'position_list.csv')
         print("Logged positions")
         break
