@@ -86,10 +86,10 @@ while True:
 
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
-        geo_df = pd.read_csv('position_list.csv')
+        df = pd.read_csv('position_list.csv')
 
-        px.set_mapbox_access_token('pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
-        fig = px.scatter_geo(geo_df)
+        fig = px.scatter_mapbox(df, lat=df[0], lon=df[1], size_max=8, color=df.sensors_imu_ins_sensor_timeOfWeek, zoom=18, center={'lat': 0, 'lon': 0})
+        fig.update_layout(mapbox_style="dark", mapbox_accesstoken='pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig.show()
         print("Logged positions")
         break
