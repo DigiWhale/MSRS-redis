@@ -79,6 +79,6 @@ while True:
         lon = new_position['lon']
         print('New position is ', lat, lon)
         position_list.append({'lat': lat, 'lon': lon})
+    except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
-    except Exception as e:
-        print(e)
+        print("Logged positions")
