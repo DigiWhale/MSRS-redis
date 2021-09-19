@@ -56,7 +56,7 @@ while True:
     # rts.incrby('test',1)
     # try:
     #     rts.range('test', 0, -1)
-    #     rts.range('test', 0, -1, aggregation_type='avg', bucket_size_msec=10)
+      print(rts.range('heading', 0, -1, aggregation_type='avg', bucket_size_msec=10))
     #     rts.range('test', 0, -1, aggregation_type='sum', bucket_size_msec=10)
     # except:
     #     pass
