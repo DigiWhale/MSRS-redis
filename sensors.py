@@ -39,6 +39,8 @@ while True:
           print(res['sensor_type'], res['sensor_value']['distance_1'])
         elif (res['sensor_type'] == 4):
           print(res['sensor_type'], res['sensor_value']['heading_3'])
+        elif (res['sensor_type'] == 5):
+          print(res['sensor_type'], res['sensor_value']['angle_2'])
       else:
         print(type(res))
     # try:
