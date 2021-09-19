@@ -31,7 +31,7 @@ def log_dict_list_to_csv(dict_list, filename):
 r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
 p.subscribe('msrs_raspberry')
-rts = Client(redis.Redis(host="localhost", port=6543, db=0))
+rts = Client(redis.Redis(host="localhost", port=6379, db=0))
 count = 0
 total_distance = 0
 lat = 0
