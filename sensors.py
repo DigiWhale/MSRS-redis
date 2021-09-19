@@ -89,7 +89,7 @@ while True:
         geo_df = pd.read_csv('position_list.csv')
 
         px.set_mapbox_access_token('pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
-        fig = px.scatter_geo(geo_df, lat=geo_df[0], lon=geo_df[1])
+        fig = px.scatter_geo(geo_df)
         fig.show()
         print("Logged positions")
         break
