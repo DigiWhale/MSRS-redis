@@ -12,6 +12,7 @@ p = r.pubsub()
 p.subscribe('msrs_raspberry')
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
 count = 0
+total_distance = 0
 try:
     rts.create('heading', labels={'Time':'Series'})
     rts.create('altitude', labels={'Time':'Series'})
@@ -22,7 +23,6 @@ except:
     pass
 while True:
     count = random.randint(0,360)
-    total_distance = 0
     
     
     
