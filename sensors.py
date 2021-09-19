@@ -51,7 +51,7 @@ while True:
     #     rts.add('test', 2, 1.12)
     # except:
     #     pass
-    # print(rts.get('test'))
+    print(rts.get('heading'))
     # time.sleep(1)
     # rts.incrby('test',1)
     # try:
