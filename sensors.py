@@ -7,7 +7,6 @@ from datetime import datetime
 from redistimeseries.client import Client
 import math
 import plotly.express as px
-import geopandas as gpd
 
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
@@ -86,7 +85,7 @@ while True:
 
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
-        geo_df = gpd.read_file('position_list.csv')
+        geo_df = open.read_file('position_list.csv')
 
         px.set_mapbox_access_token('pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig = px.scatter_geo(geo_df, lat=geo_df[0], lon=geo_df[1])
