@@ -63,7 +63,10 @@ while True:
 
 
       # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
-      new_position = calculate_new_coordinates(lat, lon, rts.get('heading'), rts.get('distance'))
+      heading = rts.get('heading')
+      distance = rts.get('distance')
+      print(heading, distance)
+      new_position = calculate_new_coordinates(lat, lon, heading, distance)
       lat = new_position['lat']
       lon = new_position['lon']
       print('New position is ', lat, lon)
