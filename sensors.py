@@ -6,6 +6,7 @@ import random
 from datetime import datetime
 from redistimeseries.client import Client
 import math
+import matplotlib.pyplot as plt
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
     R = 6378.1 #Radius of the Earth
@@ -79,6 +80,13 @@ while True:
         lon = new_position['lon']
         print('Heading: ', heading[1], 'Distance:', distance[1], 'New position is ', lat, lon)
         position_list.append({'lat': lat, 'lon': lon})
+        
+
+        xs = [0, 1, 2, 3, 4, 5, 6, 7]
+        ys = [1, 0.3, -2.3, 5.1, 7.6, -0.2, -1.8, 4]
+
+        plt.plot(xs, ys)
+        plt.show()
     except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
         print("Logged positions")
