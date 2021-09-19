@@ -5,7 +5,23 @@ import json
 import random
 from datetime import datetime
 from redistimeseries.client import Client
-import ast
+import math
+
+def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
+    R = 6378.1 #Radius of the Earth
+    brng = heading * (math.pi / 180) #Heading is converted to radians.
+    d = distance #Distance in km
+
+    lat1 = prev_lat * (math.pi / 180) #Current lat point converted to radians
+    lon1 = prev_lon * (math.pi / 180) #Current lon point converted to radians
+
+    lat2 = math.asin(math.sin(lat1)*math.cos(d/R) + math.cos(lat1)*math.sin(d/R)*math.cos(brng))
+    lon2 = lon1 + math.atan2(math.sin(brng)*math.sin(d/R)*math.cos(lat1), math.cos(d/R)-math.sin(lat1)*math.sin(lat2))
+
+    lat2 = math.degrees(lat2)
+    lon2 = math.degrees(lon2)
+
+    return {'lat': lat2, 'lon': lon2}
 
 r = redis.StrictRedis(host='192.168.1.4', port=6379, db=0, password='Redis2019!', charset="utf-8", decode_responses=True)
 p = r.pubsub()
@@ -13,6 +29,8 @@ p.subscribe('msrs_raspberry')
 rts = Client(redis.Redis(host="localhost", port=6543, db=0))
 count = 0
 total_distance = 0
+lat = 0
+lon = 0
 try:
     rts.create('heading', labels={'Time':'Series'})
     rts.create('altitude', labels={'Time':'Series'})
@@ -22,11 +40,6 @@ try:
 except:
     pass
 while True:
-    count = random.randint(0,360)
-    
-    
-    
-    # print(rts.get('heading'), rts.get('acceleration'), rts.get('angle'), rts.get('distance'), rts.get('speed'))
     msg = p.get_message()
     if msg:
       res = json.loads(str(msg['data']).replace("'", ""))
@@ -48,18 +61,9 @@ while True:
           # print(res['sensor_type'], res['sensor_value']['angle_2'])
           rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
 
-    # try:
-    #     rts.add('test', 1, 1.12)
-    #     rts.add('test', 2, 1.12)
-    # except:
-    #     pass
-      print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
-    # time.sleep(1)
-    # rts.incrby('test',1)
-    # try:
-    #     rts.range('test', 0, -1)
-      # print(rts.range('heading', 0, -1, aggregation_type='avg', bucket_size_msec=10))
-    #     rts.range('test', 0, -1, aggregation_type='sum', bucket_size_msec=10)
-    # except:
-    #     pass
-    # rts.info('test').__dict__
+
+      # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
+      new_position = calculate_new_coordinates(lat, lon, rts.get('heading'), rts.get('distance'))
+      lat = new_position['lat']
+      lon = new_position['lon']
+      print('New position is ', lat, lon)
