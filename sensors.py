@@ -39,7 +39,7 @@ while True:
           # print(res['sensor_type'], res['sensor_value']['distance_1'])
           rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
           rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
-          total_distance += res['sensor_value']['distance_1'][1]
+          total_distance += res['sensor_value']['distance_1']
 
         elif (res['sensor_type'] == 4):
           # print(res['sensor_type'], res['sensor_value']['heading_3'])
