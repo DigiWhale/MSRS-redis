@@ -53,7 +53,7 @@ except:
 while True:
     try:
       msg = p.get_message()
-      print(type(b''))
+      print(type(msg) == type(b''))
       if type(msg) == type(b''):
         print(msg)
         # res = json.loads(str(msg['data']).replace("'", ""))
