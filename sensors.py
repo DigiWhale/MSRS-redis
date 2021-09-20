@@ -51,8 +51,8 @@ try:
 except:
     pass
 while True:
-    msg = p.get_message()
     try:
+      msg = p.get_message()
       if msg:
         # print('{' + str(msg['data'])[1:-1] + '}')
         res = json.loads('{' + str(msg['data'])[1:-1] + '}')
