@@ -59,6 +59,7 @@ while True:
           res = json.loads('{' + str(msg['data'])[1:-1] + '}')
           # res = ast.literal_eval(str(msg['data'])[2:-1])
           if (type(res) == type(dict())):
+            print(res['sensor_type'])
             if (res['sensor_type'] == 6):
               # print(res['sensor_type'], res['sensor_value']['altitude'])
               rts.add('altitude', '*', res['sensor_value']['altitude'], duplicate_policy='last')
