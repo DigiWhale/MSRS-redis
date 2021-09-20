@@ -56,7 +56,7 @@ while True:
       if msg:
         print('{' + str(msg['data'])[1:-1] + '}')
         try:
-          res = json.loads(str(msg['data'])[2:-1])
+          res = json.loads('{' + str(msg['data'])[1:-1] + '}')
           # res = ast.literal_eval(str(msg['data'])[2:-1])
           if (type(res) == type(dict())):
             if (res['sensor_type'] == 6):
