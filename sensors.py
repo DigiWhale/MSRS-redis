@@ -54,8 +54,8 @@ while True:
     try:
       msg = p.get_message()
       if msg:
-        # res = json.loads(str(msg['data']).replace("'", ""))
-        res = ast.literal_eval(str(msg['data'])[2:-1])
+        res = json.loads(str(msg['data']).replace("'", ""))
+        # res = ast.literal_eval(str(msg['data'])[2:-1])
         if (type(res) == type(dict())):
           if (res['sensor_type'] == 6):
             # print(res['sensor_type'], res['sensor_value']['altitude'])
