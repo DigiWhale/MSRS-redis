@@ -8,6 +8,7 @@ from redistimeseries.client import Client
 import math
 import plotly.express as px
 import pandas as pd
+import ast
 
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
@@ -53,7 +54,8 @@ while True:
     try:
       msg = p.get_message()
       if msg:
-        res = json.loads(str(msg['data']).replace("'", ""))
+        # res = json.loads(str(msg['data']).replace("'", ""))
+        res = ast.literal_eval(str(msg['data'])[2:-1])
         if (type(res) == type(dict())):
           if (res['sensor_type'] == 6):
             # print(res['sensor_type'], res['sensor_value']['altitude'])
