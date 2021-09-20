@@ -53,7 +53,7 @@ except:
 while True:
     try:
       msg = p.get_message()
-      if msg != None:
+      if msg:
         print(msg)
         # res = json.loads(str(msg['data']).replace("'", ""))
         res = ast.literal_eval(str(msg['data'])[2:-1])
