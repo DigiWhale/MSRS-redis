@@ -76,12 +76,13 @@ while True:
         # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
         heading = rts.get('heading')
         distance = rts.get('distance')
+        angle = rts.get('angle')
         # print(heading[1], distance[1])
         new_position = calculate_new_coordinates(lat, lon, heading[1], distance[1])
         if lat != new_position['lat'] or lon != new_position['lon']:
           lat = new_position['lat']
           lon = new_position['lon']
-          print('Heading: ', heading[1], 'Distance:', distance[1], 'New position is ', lat, lon)
+          print('Heading: ', heading[1], 'Distance:', distance[1], 'Total distance: ', total_distance, 'Angle: ', angle)
           position_list.append({'lat': lat, 'lon': lon})
         
 
