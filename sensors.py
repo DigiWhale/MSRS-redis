@@ -78,10 +78,11 @@ while True:
         distance = rts.get('distance')
         # print(heading[1], distance[1])
         new_position = calculate_new_coordinates(lat, lon, heading[1], distance[1])
-        lat = new_position['lat']
-        lon = new_position['lon']
-        print('Heading: ', heading[1], 'Distance:', distance[1], 'New position is ', lat, lon)
-        position_list.append({'lat': lat, 'lon': lon})
+        if lat != new_position['lat'] or lon != new_position['lon']:
+          lat = new_position['lat']
+          lon = new_position['lon']
+          print('Heading: ', heading[1], 'Distance:', distance[1], 'New position is ', lat, lon)
+          position_list.append({'lat': lat, 'lon': lon})
         
 
     except:
