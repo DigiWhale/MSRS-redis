@@ -82,7 +82,7 @@ while True:
         if lat != new_position['lat'] or lon != new_position['lon']:
           lat = new_position['lat']
           lon = new_position['lon']
-          print('Heading: ', heading[1], 'Distance:', distance[1], 'Total distance: ', total_distance, 'Angle: ', angle)
+          print('Heading: ', heading[1], 'Distance:', distance[1], 'Total distance: ', total_distance, 'Angle: ', angle[1])
           position_list.append({'lat': lat, 'lon': lon})
         
 
