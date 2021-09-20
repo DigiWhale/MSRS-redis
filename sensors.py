@@ -51,9 +51,9 @@ try:
 except:
     pass
 while True:
+    msg = p.get_message()
+    print(type(msg))
     try:
-      msg = p.get_message()
-      print(type(msg))
       if type(msg) == type(b''):
         print(msg)
         # res = json.loads(str(msg['data']).replace("'", ""))
