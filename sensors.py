@@ -54,7 +54,7 @@ while True:
     msg = p.get_message()
     try:
       if msg:
-        # print(msg)
+        print(str(msg['data'])[2:-1])
         try:
           res = json.loads(str(msg['data'])[2:-1])
           # res = ast.literal_eval(str(msg['data'])[2:-1])
