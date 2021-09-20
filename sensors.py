@@ -53,27 +53,30 @@ except:
 while True:
     msg = p.get_message()
     try:
-      if type(msg) == type(dict()):
+      if msg:
         print(msg)
         # res = json.loads(str(msg['data']).replace("'", ""))
-        res = ast.literal_eval(str(msg['data'])[2:-1])
-        if (type(res) == type(dict())):
-          if (res['sensor_type'] == 6):
-            # print(res['sensor_type'], res['sensor_value']['altitude'])
-            rts.add('altitude', '*', res['sensor_value']['altitude'], duplicate_policy='last')
-          elif (res['sensor_type'] == 3):
-            # print(res['sensor_type'], res['sensor_value']['velocity_1'])
-            # print(res['sensor_type'], res['sensor_value']['distance_1'])
-            rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
-            rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
-            total_distance += res['sensor_value']['distance_1']
+        try:
+          res = ast.literal_eval(str(msg['data'])[2:-1])
+          if (type(res) == type(dict())):
+            if (res['sensor_type'] == 6):
+              # print(res['sensor_type'], res['sensor_value']['altitude'])
+              rts.add('altitude', '*', res['sensor_value']['altitude'], duplicate_policy='last')
+            elif (res['sensor_type'] == 3):
+              # print(res['sensor_type'], res['sensor_value']['velocity_1'])
+              # print(res['sensor_type'], res['sensor_value']['distance_1'])
+              rts.add('speed', '*', res['sensor_value']['velocity_1'], duplicate_policy='last')
+              rts.add('distance', '*', res['sensor_value']['distance_1'], duplicate_policy='last')
+              total_distance += res['sensor_value']['distance_1']
 
-          elif (res['sensor_type'] == 4):
-            # print(res['sensor_type'], res['sensor_value']['heading_3'])
-            rts.add('heading', '*', res['sensor_value']['heading_3'], duplicate_policy='last')
-          elif (res['sensor_type'] == 5):
-            # print(res['sensor_type'], res['sensor_value']['angle_2'])
-            rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
+            elif (res['sensor_type'] == 4):
+              # print(res['sensor_type'], res['sensor_value']['heading_3'])
+              rts.add('heading', '*', res['sensor_value']['heading_3'], duplicate_policy='last')
+            elif (res['sensor_type'] == 5):
+              # print(res['sensor_type'], res['sensor_value']['angle_2'])
+              rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
+        except Exception as e:
+          print(e)
 
 
         # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
