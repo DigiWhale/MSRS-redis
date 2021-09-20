@@ -88,7 +88,7 @@ while True:
           position_list.append({'lat': lat, 'lon': lon})
         
 
-    finally:
+    except:
         log_dict_list_to_csv(position_list, 'position_list.csv')
         df = pd.DataFrame(position_list)
 
