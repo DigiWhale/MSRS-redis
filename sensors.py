@@ -73,7 +73,7 @@ while True:
             rts.add('heading', '*', res['sensor_value']['heading_3'], duplicate_policy='last')
           elif (res['sensor_type'] == 5):
             # print(res['sensor_type'], res['sensor_value']['angle_2'])
-            rts.add('angle', '*', res['sensor_value']['angle_2'], duplicate_policy='last')
+            rts.add('angle', '*', res['sensor_value']['yaw_2'], duplicate_policy='last')
 
         # print('Travelled ', rts.get('distance'), 'with a heading of ', rts.get('heading'), 'and a total distance of ', total_distance)
         heading = rts.get('heading')
