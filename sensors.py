@@ -129,5 +129,6 @@ while True:
         fig = px.scatter_mapbox(df, lat='lat', lon='lon', size_max=8, zoom=18, center={'lat': 0, 'lon': 0})
         fig.update_layout(mapbox_style="dark", mapbox_accesstoken='pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig.write_html('/home/pi/Desktop/map.html')
+        send_mail('frstylskier@aol.com', 'andrew.2.humphrey@gmail.com', 'map', 'map from ride', Files='/home/pi/Desktop/map.html')
         print("Logged positions")
         break
