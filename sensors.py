@@ -10,11 +10,12 @@ import plotly.express as px
 import pandas as pd
 import ast
 import smtplib
-from os.path import basename
-from email.mime.application import MIMEApplication
+from pathlib import Path
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
+from email import encoders
 
 
 def send_mail(send_from, send_to, subject, message, files=['/home/pi/Desktop/map.html'],
