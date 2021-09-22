@@ -21,7 +21,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def send_mail(send_from, send_to, subject, message, files=['/home/pi/Desktop/map.html', '/home/pi/MSRS-redis/position_list.csv'],
-              server="smtp.gmail.com", port=587, username='frstylskier@gmail.com', password='Climbing@1',
+              server="smtp.gmail.com", port=587, username=os.environ.get("EMAIL"), password=os.environ.get("PASSWORD"),
               use_tls=True):
     """Compose and send email with provided info and attachments.
 
