@@ -17,6 +17,7 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 from email import encoders
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
