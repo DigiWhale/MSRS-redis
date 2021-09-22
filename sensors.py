@@ -16,7 +16,9 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 from email import encoders
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def send_mail(send_from, send_to, subject, message, files=['/home/pi/Desktop/map.html', '/home/pi/MSRS-redis/position_list.csv'],
               server="smtp.gmail.com", port=587, username='frstylskier@gmail.com', password='Climbing@1',
