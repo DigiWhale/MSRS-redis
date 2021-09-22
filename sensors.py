@@ -17,31 +17,46 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, subject, text, files=None, server="stmp@gmail.com", port=587, username="frstylskier@gmail.com", password="Climbing@1"):
-    assert isinstance(send_to, list)
+def send_mail(send_from, send_to, subject, message, files=['/home/pi/Desktop/map.html'],
+              server="smtp.gmail.com", port=587, username='frstylskier@gmail.com', password='Climbing@1',
+              use_tls=True):
+    """Compose and send email with provided info and attachments.
 
+    Args:
+        send_from (str): from name
+        send_to (list[str]): to name(s)
+        subject (str): message title
+        message (str): message body
+        files (list[str]): list of file paths to be attached to email
+        server (str): mail server host name
+        port (int): port number
+        username (str): server auth username
+        password (str): server auth password
+        use_tls (bool): use TLS mode
+    """
     msg = MIMEMultipart()
     msg['From'] = send_from
     msg['To'] = COMMASPACE.join(send_to)
     msg['Date'] = formatdate(localtime=True)
     msg['Subject'] = subject
 
-    msg.attach(MIMEText(text))
+    msg.attach(MIMEText(message))
 
-    for f in files or []:
-        with open(f, "rb") as fil:
-            part = MIMEApplication(
-                fil.read(),
-                Name=basename(f)
-            )
-        # After the file is closed
-        part['Content-Disposition'] = 'attachment; filename="%s"' % basename(f)
+    for path in files:
+        part = MIMEBase('application', "octet-stream")
+        with open(path, 'rb') as file:
+            part.set_payload(file.read())
+        encoders.encode_base64(part)
+        part.add_header('Content-Disposition',
+                        'attachment; filename={}'.format(Path(path).name))
         msg.attach(part)
 
-
-    smtp = smtplib.SMTP(server)
+    smtp = smtplib.SMTP(server, port)
+    if use_tls:
+        smtp.starttls()
+    smtp.login(username, password)
     smtp.sendmail(send_from, send_to, msg.as_string())
-    smtp.close()
+    smtp.quit()
 
 
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
@@ -128,6 +143,6 @@ while True:
         fig = px.scatter_mapbox(df, lat='lat', lon='lon', size_max=8, zoom=18, center={'lat': 0, 'lon': 0})
         fig.update_layout(mapbox_style="dark", mapbox_accesstoken='pk.eyJ1IjoiZnJzdHlsc2tpZXIiLCJhIjoiY2tmdDFveTI5MGxraDJxdHMzYXM4OXFiciJ9.96hyKcaRFBFzH6xcsN3CYQ')
         fig.write_html('/home/pi/Desktop/map.html')
-        send_mail('frstylskier@gmail.com', ['andrew.2.humphrey@gmail.com'], 'map', 'map from ride', files=['/home/pi/Desktop/map.html'])
+        send_mail('frstylskier@gmail.com', ['andrew.2.humphrey@gmail.com'], 'map', 'map from ride')
         print("Logged positions")
         break
