@@ -17,8 +17,7 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 
 
-def send_mail(send_from, send_to, subject, text, files=None,
-              server="127.0.0.1"):
+def send_mail(send_from, send_to, subject, text, files=None, server="stmp@gmail.com", port=587, username="frstylskier@gmail.com", password="Climbing@1"):
     assert isinstance(send_to, list)
 
     msg = MIMEMultipart()
