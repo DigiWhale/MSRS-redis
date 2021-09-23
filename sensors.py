@@ -66,7 +66,7 @@ def send_mail(send_from, send_to, subject, message, files=['/home/pi/Desktop/map
 def calculate_new_coordinates(prev_lat, prev_lon, heading, distance):
     R = 6378.1 #Radius of the Earth
     brng = heading * (math.pi / 180) #Heading is converted to radians.
-    d = distance #Distance in km
+    d = distance/1000 #meters to distance in km
 
     lat1 = prev_lat * (math.pi / 180) #Current lat point converted to radians
     lon1 = prev_lon * (math.pi / 180) #Current lon point converted to radians
