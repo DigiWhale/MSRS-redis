@@ -137,7 +137,7 @@ while True:
           lat = new_position['lat']
           lon = new_position['lon']
           print('Heading: ', heading[1], 'Distance:', distance[1], 'Total distance: ', total_distance, 'Angle: ', angle[1])
-          position_list.append({'lat': lat, 'lon': lon, 'total_distance': total_distance, 'angle': angle[1], 'heading': heading[1]})
+          position_list.append({'lat': lat, 'lon': lon, 'total_distance': total_distance, 'angle': angle[1], 'heading': heading[1], 'time': heading[0]})
         
 
     except:
