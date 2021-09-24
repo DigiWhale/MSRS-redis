@@ -1,6 +1,6 @@
 import redis
 from redistimeseries.client import Client
-
+import json
 
 # rts = Client(host='localhost', port=6379, db=0)
 r = redis.Redis(host='192.168.1.4', port=6379, db=0, password='Redis2019!')
@@ -18,4 +18,5 @@ p.subscribe('msrs_raspberry', 'msrs_sensor')
 while True:
   msg = p.get_message()
   if msg:
-    print(msg['data'])
+    res = json.loads(str(msg['data']).replace("'", "")) 
+    print(res.sensor_type) 
