@@ -19,4 +19,5 @@ while True:
   msg = p.get_message()
   if msg:
     res = json.loads(str(msg['data']).replace("'", "")) 
-    print(res.sensor_type) 
+    if (type(res) == type(dict())):
+      print(res.sensor_type) 
