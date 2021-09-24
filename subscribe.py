@@ -18,6 +18,6 @@ p.subscribe('msrs_raspberry', 'msrs_sensor')
 while True:
   msg = p.get_message()
   if msg:
-    res = json.loads('{' + str(msg['data'])[1:-1] + '}')
+    res = json.loads('{' + str(msg['data'])[1:-1] + '}'.replace("'", '"'))
     if (type(res) == type(dict())):
       print(res) 
