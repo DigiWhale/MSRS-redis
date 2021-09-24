@@ -18,6 +18,6 @@ p.subscribe('msrs_raspberry', 'msrs_sensor')
 while True:
   msg = p.get_message()
   if msg:
-    res = ast.literal_eval(str(msg['data'])[2:-1])
+    res = ast.literal_eval(str(msg['data'])[1:-1])
     if (type(res) == type(dict())):
       print(res['sensor_type']) 
